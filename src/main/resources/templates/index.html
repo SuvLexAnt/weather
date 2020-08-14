@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+<div class="container">
+    <h1>Weather app</h1>
+    <div class="divider"></div>
+    <div class="row">
+        <div class="col s4">
+            <p><b>Please write down the city name so we could recommend you what to wear</b></p>
+            <form th:method="get" action="#" th:action="@{/recommendation}">
+                <label>
+                    City
+                    <i class="material-icons left">location_city</i>
+                    <input type="text" name="city" class="validate" required="required" pattern="[A-Za-z0-9]{1,50}">
+                </label>
+                <button class="btn waves-effect waves-light" type="submit">
+                    Get recommendations
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
+        </div>
+        <div class="col s3"
+             th:if="${weatherAndRecommendations?.weather != null}"
+             th:object="${weatherAndRecommendations?.weather}">
+            <p><b>This is current weather</b></p>
+            <table class="highlight">
+                <tbody>
+                <tr>
+                    <td>Location</td>
+                    <td th:text="*{locationName}">0</td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td>Temperature</td>
+                    <td th:text="*{temperature + ' C'}">0</td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td>Wind speed</td>
+                    <td th:text="*{windSpeed + ' m/s'}">0</td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td>Humidity</td>
+                    <td th:text="*{humidity + '%'}">0</td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td>Rain</td>
+                    <td th:text="*{rain}">0</td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td>Snow</td>
+                    <td th:text="*{snow}">0</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col s4"
+             th:if="${weatherAndRecommendations?.recommendations != null}"
+             th:object="${weatherAndRecommendations?.recommendations}">
+            <h5>Recommendations</h5>
+            <ul class="collection with-header" th:if="*{hat != null}">
+                <li class="collection-header"><b>Hat</b></li>
+                <li class="collection-item"><div th:text="*{hat.name}">No hat</div></li>
+            </ul>
+            <ul class="collection with-header">
+                <li class="collection-header"><b>Body</b></li>
+                <li class="collection-item" th:each="bodyItem: *{body}"><div th:text="${bodyItem.name}">No dress</div></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

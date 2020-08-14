@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "openweather.apiKey",
+      "type": "java.lang.String",
+      "description": "Key to api to get weather."
+    },
+    {
+      "name": "openweather.timeOutMs",
+      "type": "java.lang.String",
+      "description": "Timout to repeat after."
+    },
+    {
+      "name": "openweather.temperatureDiff",
+      "type": "java.lang.Double",
+      "description": "Description for openweather.temperatureDiff."
+    }
+  ] }
