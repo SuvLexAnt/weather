@@ -6,7 +6,6 @@ plugins {
     kotlin("jvm") version "1.3.72"
     kotlin("plugin.spring") version "1.3.72"
     kotlin("plugin.jpa") version "1.3.72"
-    id("org.flywaydb.flyway") version "6.5.4"
 }
 
 group = "ru.suvorov"
@@ -24,19 +23,24 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    //Base
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
     compileOnly("org.springframework:spring-web")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    annotationProcessor("org.projectlombok:lombok")
+    //DB connection
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    runtimeOnly("org.postgresql:postgresql")
+    //Cache
+    compileOnly("org.springframework.boot:spring-boot-starter-data-redis")
+    //Template engine
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    //Test
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }

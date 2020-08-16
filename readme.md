@@ -6,7 +6,8 @@
 В качестве языка программирования `Kotlin`, 
 использован фреймворк `Spring`, 
 для фронта выбран шаблонизатор `Thymeleaf`,
-база данных для рекомендаций - `Postgres`.
+база данных для рекомендаций - `Postgres`,
+в качестве кэша - `Redis`.
 
 Кроме того, были использованы стандартные стили `Materialize`.
 
@@ -14,8 +15,13 @@
 ![Screenshot](/src/main/resources/ScreenShot.png)
 
 Для запуска БД:
+> docker pull postgres
 > docker run --name weather_db -e POSTGRES_PASSWORD=password -d -p 5434:5432 postgres
->
+
+Для активации кэша:
+> docker pull redis
+> docker run --name redis-cache -p 6379:6379 redis
+
 Для запуска приложения достаточно запустить jar-файл со встроенным сервером `Tomcat`
 
 ### Схема работы и архитектура приложения

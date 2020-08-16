@@ -28,6 +28,7 @@ class RecommendationController(
         } catch (ex: RuntimeException) {
             //TODO: Handle this exception by AOP in different class and in different way for unknown exception and
             // OpenWeatherException
+            print("Exception")
         }
         return modelAndView
     }

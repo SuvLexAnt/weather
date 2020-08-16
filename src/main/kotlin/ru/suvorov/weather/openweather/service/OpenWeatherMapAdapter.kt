@@ -2,6 +2,7 @@ package ru.suvorov.weather.openweather.service
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClientException
@@ -24,6 +25,7 @@ class OpenWeatherMapAdapter(
     //TODO: Add Spring Retry functionality to make it fail tolerant
     //TODO: Cover later parsing Unit tests
     //TODO: Add cashing by Redis or Memcached
+    @Cacheable("weather", key = "#city")
     override fun getWeatherByCity(city: String): Weather {
         val url = "http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}"
         var response: ResponseEntity<WeatherDTO?>? = null

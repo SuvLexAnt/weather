@@ -1,5 +1,7 @@
 package ru.suvorov.weather.domain.dto
 
+import java.io.Serializable
+
 
 data class Weather(
         val locationName: String,
@@ -8,4 +10,6 @@ data class Weather(
         val humidity: Int,
         val rain: Boolean,
         val snow: Boolean
-)
+): Serializable {
+    val serialVersionUID = 1
+}

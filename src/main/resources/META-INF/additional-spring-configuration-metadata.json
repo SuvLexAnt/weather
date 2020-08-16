@@ -15,4 +15,5 @@
       "type": "java.lang.Double",
       "description": "Description for openweather.temperatureDiff."
     }
-  ] }
+  ]
+}
