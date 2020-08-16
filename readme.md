@@ -12,7 +12,7 @@
 Кроме того, были использованы стандартные стили `Materialize`.
 
 Данные о погоде и рекомендациях по поводу одежды подставляются html-страницу шаблонизатором и высылаются пользователю:
-![Screenshot](/src/main/resources/images/Screenshot for md.jpg)
+![Screenshot](/src/main/resources/images/Screenshot_for_md.jpg)
 
 Для запуска БД:
 > docker pull postgres
