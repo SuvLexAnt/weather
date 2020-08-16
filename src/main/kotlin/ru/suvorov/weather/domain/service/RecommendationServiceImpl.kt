@@ -11,11 +11,11 @@ class RecommendationServiceImpl(
         private val dressingService: DressingService
 ): RecommendationService {
 
-    override fun getWeatherAndRecommendationsByCity(city: String): WeatherAndRecommendations {
+    override fun getWeatherAndRecommendationsByCity(city: String, temperatureDiff: Int): WeatherAndRecommendations {
         val weather = weatherService.getWeatherByCity(city)
         return WeatherAndRecommendations(
                 weather,
-                dressingService.getRecommendationsByWeather(weather)
+                dressingService.getRecommendationsByWeather(weather, temperatureDiff)
         )
     }
 }

@@ -5,5 +5,5 @@ import ru.suvorov.weather.domain.dto.Weather
 
 interface DressingService {
 
-    fun getRecommendationsByWeather(weather: Weather): Recommendations
+    fun getRecommendationsByWeather(weather: Weather, temperatureDiff: Int): Recommendations
 }

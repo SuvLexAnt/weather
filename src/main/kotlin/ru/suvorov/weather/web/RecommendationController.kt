@@ -20,11 +20,13 @@ class RecommendationController(
     @GetMapping("/recommendation")
     fun getRecommendationsByCity(
             @RequestParam("city") city: String,
+            @RequestParam("temperatureDiff") temperatureDiff: Int,
             modelAndView: ModelAndView): ModelAndView {
         modelAndView.viewName = "index"
+        modelAndView.addObject("temperatureDiff", temperatureDiff)
         try {
             modelAndView.addObject("weatherAndRecommendations",
-                    recommendationService.getWeatherAndRecommendationsByCity(city))
+                    recommendationService.getWeatherAndRecommendationsByCity(city, temperatureDiff))
         } catch (ex: RuntimeException) {
             //TODO: Handle this exception by AOP in different class and in different way for unknown exception and
             // OpenWeatherException

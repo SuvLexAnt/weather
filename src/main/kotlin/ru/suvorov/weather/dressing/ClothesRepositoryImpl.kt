@@ -15,12 +15,12 @@ class ClothesRepositoryImpl(
     @Value("\${temperatureDiff}")
     private var temperatureDiff: Int = 0
 
-    override fun getRecommendationsByParams(snow: Boolean, rain: Boolean, temperature: Double) = Recommendations(
-            getHatByParams(snow, rain, temperature),
-            getBodyByParams(snow, rain, temperature)
+    override fun getRecommendationsByParams(snow: Boolean, rain: Boolean, temperature: Double, temperatureDiff: Int) = Recommendations(
+            getHatByParams(snow, rain, temperature, temperatureDiff),
+            getBodyByParams(snow, rain, temperature, temperatureDiff)
     )
 
-    fun getHatByParams(snow: Boolean, rain: Boolean, temperature: Double): Hat? = jdbc.query(
+    fun getHatByParams(snow: Boolean, rain: Boolean, temperature: Double, temperatureDiff: Int = this.temperatureDiff): Hat? = jdbc.query(
             """SELECT NAME FROM CLOTHES WHERE
                     TYPE = '${Type.HAT.toString().toLowerCase()}' AND
                     TEMPERATURE BETWEEN ${temperature - temperatureDiff} AND ${temperature + temperatureDiff} AND
@@ -28,7 +28,7 @@ class ClothesRepositoryImpl(
                     RAIN = $rain""", rmHat())
             .getOrNull(0)
 
-    fun getBodyByParams(snow: Boolean, rain: Boolean, temperature: Double): List<Body> = jdbc.query(
+    fun getBodyByParams(snow: Boolean, rain: Boolean, temperature: Double, temperatureDiff: Int = this.temperatureDiff): List<Body> = jdbc.query(
             """SELECT NAME FROM CLOTHES WHERE
                     TYPE = '${Type.BODY.toString().toLowerCase()}' AND
                     TEMPERATURE BETWEEN ${temperature - temperatureDiff} AND ${temperature + temperatureDiff} AND

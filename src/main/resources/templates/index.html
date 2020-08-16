@@ -12,12 +12,26 @@
     <div class="divider"></div>
     <div class="row">
         <div class="col s4">
-            <p><b>Please write down the city name so we could recommend you what to wear</b></p>
-            <form th:method="get" action="#" th:action="@{/recommendation}">
+            <p><b>Please write down the city name and your temperature tolerance so we could recommend you what to
+                wear</b></p>
+            <form th:method="get" action="#" th:action="@{/recommendation}" name="requestForm">
+                <label>
+                    <output name="temperatureDiffOutput" id="temperatureDiffOutput"
+                            th:value="${temperatureDiff ?: @environment.getProperty('temperatureDiff')}"
+                            th:text="'Temperature tolerance: ' + ${temperatureDiff ?: @environment.getProperty('temperatureDiff') + ' C'}">
+                        9
+                    </output>
+                    <i class="material-icons left">ac_unit</i>
+                    <i class="material-icons right">wb_sunny</i>
+                    <input type="range" id="temperatureDiff" name="temperatureDiff"
+                           min="0" max="30" value="9"
+                           th:value="${temperatureDiff ?: @environment.getProperty('temperatureDiff')}">
+                </label>
                 <label>
                     City
                     <i class="material-icons left">location_city</i>
-                    <input type="text" name="city" class="validate" required="required" pattern="[A-Za-z0-9]{1,50}">
+                    <input type="text" name="city" class="validate" required="required"
+                           pattern="[A-Za-z0-9]{1,50}">
                 </label>
                 <button class="btn waves-effect waves-light" type="submit">
                     Get recommendations
@@ -36,5 +50,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.requestForm.temperatureDiff.oninput = function () {
+        document.requestForm.temperatureDiffOutput.value = 'Temperature tolerance: ' + document.requestForm.temperatureDiff.value + ' C';
+    }
+</script>
 </body>
 </html>

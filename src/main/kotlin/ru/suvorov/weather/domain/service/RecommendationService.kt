@@ -4,5 +4,5 @@ import ru.suvorov.weather.domain.dto.WeatherAndRecommendations
 
 interface RecommendationService {
 
-    fun getWeatherAndRecommendationsByCity(city: String): WeatherAndRecommendations
+    fun getWeatherAndRecommendationsByCity(city: String, temperatureDiff: Int): WeatherAndRecommendations
 }

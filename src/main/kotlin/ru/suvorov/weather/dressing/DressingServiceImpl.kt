@@ -10,7 +10,7 @@ class DressingServiceImpl(
         private val clothesRepository: ClothesRepository
 ): DressingService {
 
-    override fun getRecommendationsByWeather(weather: Weather): Recommendations {
-        return clothesRepository.getRecommendationsByParams(weather.snow, weather.rain, weather.temperature)
+    override fun  getRecommendationsByWeather(weather: Weather, temperatureDiff: Int): Recommendations {
+        return clothesRepository.getRecommendationsByParams(weather.snow, weather.rain, weather.temperature, temperatureDiff)
     }
 }

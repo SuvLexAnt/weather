@@ -2,7 +2,7 @@ openweather:
   apiKey: 4b90b3ba5659e1d08a9ecf0b7cb58188
   timeoutMs: 1000
   repeatTime: 3
-  temperatureDiff: 10
+  temperatureDiff: 9
 server:
   port: 8080
 spring:
