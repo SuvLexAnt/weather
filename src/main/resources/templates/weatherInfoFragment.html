@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="weatherInfo (weather)">
+    <!--/*@thymesVar id="weather" type="ru.suvorov.weather.domain.dto.Weather"*/-->
+    <div th:object="${weather}">
+        <p><b>This is current weather</b></p>
+        <table class="highlight">
+            <tbody>
+            <tr>
+                <td>Location</td>
+                <td th:text="*{locationName}">0</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <td>Temperature</td>
+                <td th:text="*{temperature + ' C'}">0</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <td>Wind speed</td>
+                <td th:text="*{windSpeed + ' m/s'}">0</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <td>Humidity</td>
+                <td th:text="*{humidity + '%'}">0</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <td>Rain</td>
+                <td th:text="*{rain}">0</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <td>Snow</td>
+                <td th:text="*{snow}">0</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

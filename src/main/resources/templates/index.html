@@ -27,62 +27,14 @@
         </div>
         <div class="col s3"
              th:if="${weatherAndRecommendations?.weather != null}"
-             th:object="${weatherAndRecommendations?.weather}">
-            <p><b>This is current weather</b></p>
-            <table class="highlight">
-                <tbody>
-                <tr>
-                    <td>Location</td>
-                    <td th:text="*{locationName}">0</td>
-                </tr>
-                </tbody>
-                <tbody>
-                <tr>
-                    <td>Temperature</td>
-                    <td th:text="*{temperature + ' C'}">0</td>
-                </tr>
-                </tbody>
-                <tbody>
-                <tr>
-                    <td>Wind speed</td>
-                    <td th:text="*{windSpeed + ' m/s'}">0</td>
-                </tr>
-                </tbody>
-                <tbody>
-                <tr>
-                    <td>Humidity</td>
-                    <td th:text="*{humidity + '%'}">0</td>
-                </tr>
-                </tbody>
-                <tbody>
-                <tr>
-                    <td>Rain</td>
-                    <td th:text="*{rain}">0</td>
-                </tr>
-                </tbody>
-                <tbody>
-                <tr>
-                    <td>Snow</td>
-                    <td th:text="*{snow}">0</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+             th:object="${weatherAndRecommendations?.weather}"
+             th:insert="~{weatherInfoFragment :: weatherInfo (weather = ${weatherAndRecommendations?.weather})}"></div>
         <div class="col s4"
              th:if="${weatherAndRecommendations?.recommendations != null}"
-             th:object="${weatherAndRecommendations?.recommendations}">
-            <h5>Recommendations</h5>
-            <ul class="collection with-header">
-                <li class="collection-header"><b>Hat</b></li>
-                <li class="collection-item" th:if="*{hat != null}"><div th:text="*{hat.name}">No hat</div></li>
-            </ul>
-            <ul class="collection with-header">
-                <li class="collection-header"><b>Body</b></li>
-                <li class="collection-item" th:each="bodyItem: *{body}"><div th:text="${bodyItem.name}">No dress</div></li>
-            </ul>
+             th:object="${weatherAndRecommendations?.recommendations}"
+             th:insert="~{recommendationsFragment :: recommendations (recommendations = ${weatherAndRecommendations?.recommendations})}">
         </div>
     </div>
 </div>
-
 </body>
 </html>
