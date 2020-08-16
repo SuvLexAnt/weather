@@ -72,9 +72,9 @@
              th:if="${weatherAndRecommendations?.recommendations != null}"
              th:object="${weatherAndRecommendations?.recommendations}">
             <h5>Recommendations</h5>
-            <ul class="collection with-header" th:if="*{hat != null}">
+            <ul class="collection with-header">
                 <li class="collection-header"><b>Hat</b></li>
-                <li class="collection-item"><div th:text="*{hat.name}">No hat</div></li>
+                <li class="collection-item" th:if="*{hat != null}"><div th:text="*{hat.name}">No hat</div></li>
             </ul>
             <ul class="collection with-header">
                 <li class="collection-header"><b>Body</b></li>

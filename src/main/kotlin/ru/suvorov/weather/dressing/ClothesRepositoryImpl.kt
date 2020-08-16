@@ -12,8 +12,8 @@ class ClothesRepositoryImpl(
         @Autowired private val jdbc: JdbcTemplate
 ) : ClothesRepository {
 
-    //TODO: Add this to configs with safe-type cast
-    private val temperatureDiff = 10
+    @Value("\${temperatureDiff}")
+    private var temperatureDiff: Int = 0
 
     override fun getRecommendationsByParams(snow: Boolean, rain: Boolean, temperature: Double) = Recommendations(
             getHatByParams(snow, rain, temperature),
@@ -36,6 +36,7 @@ class ClothesRepositoryImpl(
                     RAIN = $rain""", rmBody()
     )
 
+    //TODO: Use generics to delete one from the methods
     fun rmHat(): RowMapper<Hat> = RowMapper { rs, _ -> Hat(rs.getString("name")) }
 
     fun rmBody(): RowMapper<Body> = RowMapper { rs, _ -> Body(rs.getString("name")) }
