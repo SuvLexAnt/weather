@@ -1,4 +1,4 @@
-package ru.suvorov.weather.dressing
+package ru.suvorov.weather.db.dressing
 
 import ru.suvorov.weather.domain.dto.Recommendations
 

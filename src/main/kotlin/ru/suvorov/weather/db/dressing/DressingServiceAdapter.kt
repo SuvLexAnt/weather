@@ -1,4 +1,4 @@
-package ru.suvorov.weather.dressing
+package ru.suvorov.weather.db.dressing
 
 import org.springframework.stereotype.Service
 import ru.suvorov.weather.domain.`interface`.DressingService
@@ -6,7 +6,7 @@ import ru.suvorov.weather.domain.dto.Recommendations
 import ru.suvorov.weather.domain.dto.Weather
 
 @Service
-class DressingServiceImpl(
+class DressingServiceAdapter(
         private val clothesRepository: ClothesRepository
 ): DressingService {
 

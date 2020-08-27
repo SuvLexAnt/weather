@@ -14,13 +14,16 @@
 Данные о погоде и рекомендациях по поводу одежды подставляются html-страницу шаблонизатором и высылаются пользователю:
 ![Screenshot](/src/main/resources/images/Screenshot_for_md.jpg)
 
+Для создания сети:
+> docker network create weather_network
+
 Для запуска БД:
 > docker pull postgres
-> docker run --name weather_db -e POSTGRES_PASSWORD=password -d -p 5434:5432 postgres
+> docker run --name weather_db -e POSTGRES_PASSWORD=password --network weather-network -d -p 5434:5432 postgres
 
 Для активации кэша:
 > docker pull redis
-> docker run --name redis-cache -p 6379:6379 redis
+> docker run --name redis-cache -p 6379:6379 --network weather-network -d redis
 
 Для запуска приложения достаточно запустить jar-файл со встроенным сервером `Tomcat`
 

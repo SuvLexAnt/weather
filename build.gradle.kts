@@ -36,6 +36,8 @@ dependencies {
     //DB connection
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     runtimeOnly("org.postgresql:postgresql")
+    //DB versioning
+    compileOnly("org.flywaydb:flyway-core")
     //Cache
     compileOnly("org.springframework.boot:spring-boot-starter-data-redis")
     //Template engine

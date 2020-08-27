@@ -1,4 +1,4 @@
-package ru.suvorov.weather.openweather
+package ru.suvorov.weather.api.openweather
 
 import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.Bean

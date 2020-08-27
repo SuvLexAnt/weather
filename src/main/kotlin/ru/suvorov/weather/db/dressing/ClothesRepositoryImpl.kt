@@ -1,4 +1,4 @@
-package ru.suvorov.weather.dressing
+package ru.suvorov.weather.db.dressing
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -22,7 +22,7 @@ class ClothesRepositoryImpl(
 
     fun getHatByParams(snow: Boolean, rain: Boolean, temperature: Double, temperatureDiff: Int = this.temperatureDiff): Hat? = jdbc.query(
             """SELECT NAME FROM CLOTHES WHERE
-                    TYPE = '${Type.HAT.toString().toLowerCase()}' AND
+                    LOWER(TYPE) = '${Type.HAT.toString().toLowerCase()}' AND
                     TEMPERATURE BETWEEN ${temperature - temperatureDiff} AND ${temperature + temperatureDiff} AND
                     SNOW = $snow AND
                     RAIN = $rain""", rmHat())
@@ -30,7 +30,7 @@ class ClothesRepositoryImpl(
 
     fun getBodyByParams(snow: Boolean, rain: Boolean, temperature: Double, temperatureDiff: Int = this.temperatureDiff): List<Body> = jdbc.query(
             """SELECT NAME FROM CLOTHES WHERE
-                    TYPE = '${Type.BODY.toString().toLowerCase()}' AND
+                    LOWER(TYPE) = '${Type.BODY.toString().toLowerCase()}' AND
                     TEMPERATURE BETWEEN ${temperature - temperatureDiff} AND ${temperature + temperatureDiff} AND
                     SNOW = $snow AND
                     RAIN = $rain""", rmBody()
