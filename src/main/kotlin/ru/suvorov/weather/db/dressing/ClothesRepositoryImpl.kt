@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Repository
-import ru.suvorov.weather.domain.dto.*
+import ru.suvorov.weather.domain.clothes.Body
+import ru.suvorov.weather.domain.clothes.Hat
+import ru.suvorov.weather.domain.clothes.SetOfClothes
+import ru.suvorov.weather.domain.clothes.Type
 
 @Repository
 class ClothesRepositoryImpl(
@@ -15,7 +18,7 @@ class ClothesRepositoryImpl(
     @Value("\${temperatureDiff}")
     private var temperatureDiff: Int = 0
 
-    override fun getRecommendationsByParams(snow: Boolean, rain: Boolean, temperature: Double, temperatureDiff: Int) = Recommendations(
+    override fun getRecommendationsByParams(snow: Boolean, rain: Boolean, temperature: Double, temperatureDiff: Int) = SetOfClothes(
             getHatByParams(snow, rain, temperature, temperatureDiff),
             getBodyByParams(snow, rain, temperature, temperatureDiff)
     )

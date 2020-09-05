@@ -1,4 +1,4 @@
-package ru.suvorov.weather.web
+package ru.suvorov.weather.web.exception
 
 import java.lang.RuntimeException
 

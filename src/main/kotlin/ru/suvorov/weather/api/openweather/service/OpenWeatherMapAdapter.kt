@@ -7,10 +7,10 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClientException
 import org.springframework.web.client.RestTemplate
-import ru.suvorov.weather.domain.`interface`.WeatherService
-import ru.suvorov.weather.domain.dto.Weather
+import ru.suvorov.weather.domain.weather.WeatherService
+import ru.suvorov.weather.domain.weather.Weather
 import ru.suvorov.weather.api.openweather.entity.WeatherDTO
-import ru.suvorov.weather.web.OpenWeatherException
+import ru.suvorov.weather.web.exception.OpenWeatherException
 import java.lang.RuntimeException
 
 @Service

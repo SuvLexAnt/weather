@@ -1,9 +1,9 @@
 package ru.suvorov.weather.domain.service
 
 import org.springframework.stereotype.Service
-import ru.suvorov.weather.domain.`interface`.DressingService
-import ru.suvorov.weather.domain.`interface`.WeatherService
-import ru.suvorov.weather.domain.dto.WeatherAndRecommendations
+import ru.suvorov.weather.domain.clothes.DressingService
+import ru.suvorov.weather.domain.weather.WeatherService
+import ru.suvorov.weather.domain.dto.WeatherAndClothesDTO
 
 @Service
 class RecommendationServiceImpl(
@@ -11,9 +11,9 @@ class RecommendationServiceImpl(
         private val dressingService: DressingService
 ): RecommendationService {
 
-    override fun getWeatherAndRecommendationsByCity(city: String, temperatureDiff: Int): WeatherAndRecommendations {
+    override fun getWeatherAndRecommendationsByCity(city: String, temperatureDiff: Int): WeatherAndClothesDTO {
         val weather = weatherService.getWeatherByCity(city)
-        return WeatherAndRecommendations(
+        return WeatherAndClothesDTO(
                 weather,
                 dressingService.getRecommendationsByWeather(weather, temperatureDiff)
         )

@@ -1,0 +1,40 @@
+version: '3.5'
+services:
+  db:
+    image: postgres
+    restart: on-failure
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: weather_db
+    ports:
+      - "5436:5432"
+    networks:
+      - main-network
+  app:
+    build: ./
+    ports:
+      - "8085:8080"
+    depends_on:
+      - db
+      - redis
+    networks:
+      - main-network
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=weather_db
+      - CACHE_HOST=redis
+  redis:
+    image: "redis:alpine"
+    networks:
+      - main-network
+    ports:
+      - "6379:6379"
+volumes:
+  weather-data:
+networks:
+  main-network:
+    driver: bridge

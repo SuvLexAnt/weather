@@ -44,9 +44,9 @@
              th:object="${weatherAndRecommendations?.weather}"
              th:insert="~{weatherInfoFragment :: weatherInfo (weather = ${weatherAndRecommendations?.weather})}"></div>
         <div class="col s4"
-             th:if="${weatherAndRecommendations?.recommendations != null}"
-             th:object="${weatherAndRecommendations?.recommendations}"
-             th:insert="~{recommendationsFragment :: recommendations (recommendations = ${weatherAndRecommendations?.recommendations})}">
+             th:if="${weatherAndRecommendations?.setOfClothes != null}"
+             th:object="${weatherAndRecommendations?.setOfClothes}"
+             th:insert="~{clothesFragment :: recommendations (recommendations = ${weatherAndRecommendations?.setOfClothes})}">
         </div>
     </div>
 </div>

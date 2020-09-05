@@ -1,4 +1,4 @@
-package ru.suvorov.weather.domain.dto
+package ru.suvorov.weather.domain.weather
 
 import java.io.Serializable
 

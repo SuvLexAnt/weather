@@ -7,14 +7,14 @@ server:
   port: 8080
 spring:
   datasource:
-    username: postgres
-    password: password
-    url: jdbc:postgresql://${RDS_HOSTNAME:localhost}:${RDS_PORT:5434}/${RDS_DB:postgres}
+    username: ${POSTGRES_USER:user}
+    password: ${POSTGRES_PASSWORD:password}
+    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5436}/${POSTGRES_DB:weather_db}
   cache:
     type: redis
     cache-names: weather
     redis:
-      time-to-live: 600000
+      time-to-live: 60000
   redis:
-    host: localhost
+    host: ${CACHE_HOST:localhost}
     port: 6379
