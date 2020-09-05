@@ -35,7 +35,9 @@
 ## При использовании Docker-compose:
 Вместо всех предыдущих команд:
 >  docker-compose up --remove-orphans -V
->
+>  gradle -Pflyway.user=user -Pflyway.schemas=public -Pflyway.password=password -Pflyway.url=jdbc:postgresql://localhost:5436/weather_db flywayMigrate
+
+Приложение можно увидеть в браузере [по адресу](http://localhost:8085/)
 
 ## Описание структуры приложения        
 ### Схема работы и архитектура приложения
