@@ -10,10 +10,10 @@ plugins {
 }
 
 flyway {
-    url = "jdbc:postgresql://localhost:5436666/weather_db"
-    user = "userRRRR"
-    password = "passwordDDDD"
-    schemas = arrayOf("publicCCC")
+    url = "jdbc:postgresql://localhost:5436/weather_db"
+    user = "user"
+    password = "password"
+    schemas = arrayOf("public")
 }
 
 group = "ru.suvorov"
@@ -47,7 +47,7 @@ dependencies {
     //DB versioning
     compileOnly("org.flywaydb:flyway-core")
     //Cache
-    compileOnly("org.springframework.boot:spring-boot-starter-data-redis")
+//    compileOnly("org.springframework.boot:spring-boot-starter-data-redis")
     //Template engine
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     //Test

@@ -23,7 +23,7 @@ class OpenWeatherMapAdapter(
 
     //TODO: Add Spring Retry functionality to make it fail tolerant
     //TODO: Cover later parsing Unit tests
-    @Cacheable("weather", key = "#city")
+//    @Cacheable("weather", key = "#city")
     override fun getWeatherByCity(city: String): Weather {
         val url = "http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}"
         var response: ResponseEntity<WeatherDTO?>? = null

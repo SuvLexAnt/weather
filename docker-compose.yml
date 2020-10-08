@@ -11,13 +11,19 @@ services:
       - "5436:5432"
     networks:
       - main-network
+#  redis:
+#    image: "redis:alpine"
+#    ports:
+#      - "6379:6379"
+#    networks:
+#      - main-network
   app:
     build: ./
     ports:
       - "8080:8080"
     depends_on:
       - db
-      - redis
+#      - redis
     networks:
       - main-network
     environment:
@@ -27,12 +33,19 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=weather_db
       - CACHE_HOST=redis
-  redis:
-    image: "redis:alpine"
+  flyway:
+    build:
+      context: .
+      dockerfile: DockerFileMigration
+#    volumes:
+#      - /db/migration:/flyway/sql
     networks:
       - main-network
-    ports:
-      - "6379:6379"
+    depends_on:
+      - db
+    deploy:
+      restart_policy:
+        condition: on-failure
 volumes:
   weather-data:
 networks:
