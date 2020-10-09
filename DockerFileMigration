@@ -3,4 +3,10 @@ MAINTAINER Suvorov Lex <AlexandrTheSlayer@mail.ru>
 
 ARG CHANGESET=src/main/resources/db/migration
 COPY ${CHANGESET} /flyway/sql
-ENTRYPOINT flyway -url=jdbc:postgresql://db:5432/weather_db -schemas=public -user=user -password=password -connectRetries=10 migrate
+ENV HOST=localhost
+ENV PORT=5436
+ENV DB=weather_db
+ENV PASSWORD=password
+ENV USER=user
+ENV SCHEMA=public
+ENTRYPOINT flyway -url=jdbc:postgresql://${HOST}:${PORT}/${DB} -schemas=${SCHEMA} -user=${USER} -password=${PASSWORD} -connectRetries=10 migrate
