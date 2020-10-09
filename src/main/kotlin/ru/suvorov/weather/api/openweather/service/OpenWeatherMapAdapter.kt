@@ -41,7 +41,7 @@ class OpenWeatherMapAdapter(
                 throw OpenWeatherException("${response.statusCode}")
             } else {
                 log.error("Unexpected error")
-                throw RuntimeException("Unexpected exception")
+                throw RuntimeException(ex)
             }
         }
     }
