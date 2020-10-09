@@ -18,3 +18,13 @@ spring:
 #  redis:
 #    host: ${CACHE_HOST:localhost}
 #    port: 6379
+logging:
+  level:
+    root: WARN
+    ru:
+      suvorov:
+        weather: INFO
+  file:
+    name: logFile
+    path: /logs
+

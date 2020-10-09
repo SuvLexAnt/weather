@@ -1,5 +1,6 @@
 package ru.suvorov.weather.web
 
+import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
@@ -8,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.servlet.ModelAndView
 import ru.suvorov.weather.domain.service.RecommendationService
+import ru.suvorov.weather.web.exception.OpenWeatherException
 import java.lang.RuntimeException
+import kotlin.math.log
 
 @Controller
+@Slf4j
 class RecommendationController(
         @Autowired
         private val recommendationService: RecommendationService
@@ -26,14 +30,8 @@ class RecommendationController(
             modelAndView: ModelAndView): ModelAndView {
         modelAndView.viewName = "index"
         modelAndView.addObject("temperatureDiff", temperatureDiff)
-        try {
-            modelAndView.addObject("weatherAndRecommendations",
-                    recommendationService.getWeatherAndRecommendationsByCity(city, temperatureDiff))
-        } catch (ex: RuntimeException) {
-            //TODO: Handle this exception by AOP in different class and in different way for unknown exception and
-            // OpenWeatherException
-            print("Exception")
-        }
+        modelAndView.addObject("weatherAndRecommendations",
+                recommendationService.getWeatherAndRecommendationsByCity(city, temperatureDiff))
         return modelAndView
     }
 }
