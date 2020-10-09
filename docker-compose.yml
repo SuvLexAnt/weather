@@ -1,27 +1,26 @@
 version: '3.5'
 services:
   db:
-    image: postgres
-    restart: on-failure
+    image: postgres:13.0-alpine
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: weather_db
     networks:
       - main-network
-#  redis:
-#    image: "redis:alpine"
-#    ports:
-#      - "6379:6379"
-#    networks:
-#      - main-network
+  redis:
+    image: redis:6.0.8-alpine
+    networks:
+      - main-network
+#    environment:
+
   app:
     build: ./
     ports:
       - "8080:8080"
     depends_on:
       - db
-#      - redis
+      - redis
     networks:
       - main-network
     environment:
@@ -31,7 +30,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=weather_db
       - CACHE_HOST=redis
-  flyway:
+  migration:
     build:
       context: .
       dockerfile: DockerFileMigration
@@ -46,7 +45,7 @@ services:
       - PASSWORD=password
       - DB=weather_db
     depends_on:
-      - db
+      - app
     deploy:
       restart_policy:
         condition: on-failure

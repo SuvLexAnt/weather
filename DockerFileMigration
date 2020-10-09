@@ -1,4 +1,4 @@
-FROM boxfuse/flyway
+FROM boxfuse/flyway:5.2.4-alpine
 MAINTAINER Suvorov Lex <AlexandrTheSlayer@mail.ru>
 
 ARG CHANGESET=src/main/resources/db/migration
