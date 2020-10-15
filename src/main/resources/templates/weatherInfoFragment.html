@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="weatherInfo (weather)">
-    <!--/*@thymesVar id="weather" type="ru.suvorov.weather.domain.weather.Weather"*/-->
+    <!--/*@thymesVar id="weather" type="ru.suvorov.weather.application.domain.weather.Weather"*/-->
     <div th:object="${weather}">
         <p><b>This is current weather</b></p>
         <table class="highlight">

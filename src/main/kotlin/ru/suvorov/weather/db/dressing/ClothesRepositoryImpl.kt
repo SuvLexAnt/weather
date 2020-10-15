@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Repository
-import ru.suvorov.weather.domain.clothes.Body
-import ru.suvorov.weather.domain.clothes.Hat
-import ru.suvorov.weather.domain.clothes.SetOfClothes
-import ru.suvorov.weather.domain.clothes.Type
+import ru.suvorov.weather.application.clothes.Body
+import ru.suvorov.weather.application.clothes.Hat
+import ru.suvorov.weather.application.clothes.SetOfClothes
+import ru.suvorov.weather.application.clothes.Type
 
 @Repository
 class ClothesRepositoryImpl(

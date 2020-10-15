@@ -1,6 +1,6 @@
-package ru.suvorov.weather.domain.service
+package ru.suvorov.weather.application.service
 
-import ru.suvorov.weather.domain.dto.WeatherAndClothesDTO
+import ru.suvorov.weather.application.dto.WeatherAndClothesDTO
 
 interface RecommendationService {
 

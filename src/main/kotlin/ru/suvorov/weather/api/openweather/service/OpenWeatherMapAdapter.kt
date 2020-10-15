@@ -3,13 +3,12 @@ package ru.suvorov.weather.api.openweather.service
 import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClientException
 import org.springframework.web.client.RestTemplate
-import ru.suvorov.weather.domain.weather.WeatherService
-import ru.suvorov.weather.domain.weather.Weather
+import ru.suvorov.weather.application.domain.weather.WeatherService
+import ru.suvorov.weather.application.domain.weather.Weather
 import ru.suvorov.weather.api.openweather.entity.WeatherDTO
 import ru.suvorov.weather.logging.logger
 import ru.suvorov.weather.web.exception.OpenWeatherException

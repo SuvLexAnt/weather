@@ -1,9 +1,9 @@
 package ru.suvorov.weather.db.dressing
 
 import org.springframework.stereotype.Service
-import ru.suvorov.weather.domain.clothes.DressingService
-import ru.suvorov.weather.domain.clothes.SetOfClothes
-import ru.suvorov.weather.domain.weather.Weather
+import ru.suvorov.weather.application.clothes.DressingService
+import ru.suvorov.weather.application.clothes.SetOfClothes
+import ru.suvorov.weather.application.domain.weather.Weather
 
 @Service
 class DressingServiceAdapter(

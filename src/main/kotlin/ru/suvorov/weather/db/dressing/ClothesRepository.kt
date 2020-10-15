@@ -1,6 +1,6 @@
 package ru.suvorov.weather.db.dressing
 
-import ru.suvorov.weather.domain.clothes.SetOfClothes
+import ru.suvorov.weather.application.clothes.SetOfClothes
 
 interface ClothesRepository {
 

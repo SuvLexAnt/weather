@@ -1,4 +1,4 @@
-package ru.suvorov.weather.domain.clothes
+package ru.suvorov.weather.application.clothes
 
 abstract class Clothes(
         val name: String,

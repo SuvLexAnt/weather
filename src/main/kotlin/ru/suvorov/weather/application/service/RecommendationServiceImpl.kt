@@ -1,9 +1,9 @@
-package ru.suvorov.weather.domain.service
+package ru.suvorov.weather.application.service
 
 import org.springframework.stereotype.Service
-import ru.suvorov.weather.domain.clothes.DressingService
-import ru.suvorov.weather.domain.weather.WeatherService
-import ru.suvorov.weather.domain.dto.WeatherAndClothesDTO
+import ru.suvorov.weather.application.clothes.DressingService
+import ru.suvorov.weather.application.domain.weather.WeatherService
+import ru.suvorov.weather.application.dto.WeatherAndClothesDTO
 
 @Service
 class RecommendationServiceImpl(

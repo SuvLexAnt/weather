@@ -1,4 +1,4 @@
-package ru.suvorov.weather.domain.weather
+package ru.suvorov.weather.application.domain.weather
 
 interface WeatherService {
 

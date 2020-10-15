@@ -1,4 +1,4 @@
-package ru.suvorov.weather.domain.clothes
+package ru.suvorov.weather.application.clothes
 
 data class SetOfClothes(
         val hat: Clothes?,

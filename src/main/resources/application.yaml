@@ -20,11 +20,19 @@ spring:
 #    port: 6379
 logging:
   level:
-    root: WARN
+    root: INFO
     ru:
       suvorov:
         weather: INFO
   file:
     name: logFile
     path: /logs
+management:
+  endpoint:
+    health:
+      show-details: when_authorized
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
