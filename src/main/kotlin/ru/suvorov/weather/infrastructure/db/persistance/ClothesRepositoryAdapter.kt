@@ -14,21 +14,15 @@ class ClothesRepositoryAdapter(
         @Autowired private val jdbc: JdbcTemplate
 ) : ClothesRepository {
 
-    @Value("\${temperatureDiff}")
-    private var temperatureDiff: Int = 0
-
     override fun getClothesByParams(snow: Boolean,
-                           rain: Boolean,
-                           temperature: Double,
-                           temperatureDiffOrNull: Int?): List<Clothes> {
-        val temperatureDiff = temperatureDiffOrNull ?: this.temperatureDiff
-        return jdbc.query("""
+                                    rain: Boolean,
+                                    temperature: Double,
+                                    temperatureDiff: Int): List<Clothes> = jdbc.query("""
             SELECT NAME, TYPE FROM CLOTHES WHERE
             TEMPERATURE BETWEEN ${temperature - temperatureDiff} AND ${temperature + temperatureDiff} 
             AND SNOW = $snow 
             AND RAIN = $rain
             """, rmClothes())
-    }
 
 
     fun rmClothes(): RowMapper<Clothes> = RowMapper { rs, _ ->

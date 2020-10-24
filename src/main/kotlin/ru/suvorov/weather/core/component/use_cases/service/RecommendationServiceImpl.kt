@@ -1,5 +1,6 @@
 package ru.suvorov.weather.core.component.use_cases.service
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import ru.suvorov.weather.core.component.clothes.SetOfClothes
 import ru.suvorov.weather.core.component.clothes.Type
@@ -15,11 +16,14 @@ class RecommendationServiceImpl(
         private val clothesRepository: ClothesRepository
 ) : RecommendationService {
 
-    override fun getWeatherAndRecommendationsByCity(city: String, temperatureDiff: Int): WeatherAndClothesDTO {
+    @Value("\${temperatureDiff}")
+    private var temperatureDiff: Int = 0
+
+    override fun getWeatherAndRecommendationsByCity(city: String, temperatureDiffOrNull: Int?): WeatherAndClothesDTO {
         val weather = weatherService.getWeatherByCity(city)
         return WeatherAndClothesDTO(
                 weather,
-                getClothesByWeather(weather, temperatureDiff)
+                getClothesByWeather(weather, temperatureDiffOrNull ?: this.temperatureDiff)
         )
     }
 

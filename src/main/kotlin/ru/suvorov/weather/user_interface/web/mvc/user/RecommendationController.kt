@@ -11,8 +11,7 @@ import ru.suvorov.weather.core.port.primary.RecommendationService
 @Controller
 @Slf4j
 class RecommendationController(
-        @Autowired
-        private val recommendationService: RecommendationService
+        @Autowired private val recommendationService: RecommendationService
 ) {
 
     @GetMapping
@@ -21,12 +20,12 @@ class RecommendationController(
     @GetMapping("/recommendation")
     fun getRecommendationsByCity(
             @RequestParam("city") city: String,
-            @RequestParam("temperatureDiff") temperatureDiff: Int,
+            @RequestParam("temperatureDiff") temperatureDiffOrNull: Int?,
             modelAndView: ModelAndView): ModelAndView {
         modelAndView.viewName = "index"
-        modelAndView.addObject("temperatureDiff", temperatureDiff)
+        modelAndView.addObject("temperatureDiff", temperatureDiffOrNull)
         modelAndView.addObject("weatherAndRecommendations",
-                recommendationService.getWeatherAndRecommendationsByCity(city, temperatureDiff))
+                recommendationService.getWeatherAndRecommendationsByCity(city, temperatureDiffOrNull))
         return modelAndView
     }
 }
