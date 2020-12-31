@@ -6,13 +6,13 @@ import ru.suvorov.weather.core.component.clothes.SetOfClothes
 import ru.suvorov.weather.core.component.clothes.Type
 import ru.suvorov.weather.core.component.use_cases.dto.WeatherAndClothesDTO
 import ru.suvorov.weather.core.component.weather.Weather
-import ru.suvorov.weather.core.port.secondary.WeatherService
+import ru.suvorov.weather.core.port.secondary.WeatherFacade
 import ru.suvorov.weather.core.port.primary.RecommendationService
 import ru.suvorov.weather.core.port.secondary.ClothesRepository
 
 @Service
 class RecommendationServiceImpl(
-        private val weatherService: WeatherService,
+        private val weatherFacade: WeatherFacade,
         private val clothesRepository: ClothesRepository
 ) : RecommendationService {
 
@@ -20,7 +20,7 @@ class RecommendationServiceImpl(
     private var temperatureDiff: Int = 0
 
     override fun getWeatherAndRecommendationsByCity(city: String, temperatureDiffOrNull: Int?): WeatherAndClothesDTO {
-        val weather = weatherService.getWeatherByCity(city)
+        val weather = weatherFacade.getWeatherByCity(city)
         return WeatherAndClothesDTO(
                 weather,
                 getClothesByWeather(weather, temperatureDiffOrNull ?: this.temperatureDiff)

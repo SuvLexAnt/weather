@@ -3,17 +3,21 @@
     {
       "name": "openweather.apiKey",
       "type": "java.lang.String",
-      "description": "Key to api to get weather."
+      "description": "API Key to http://api.openweathermap.org."
     },
     {
-      "name": "openweather.timeOutMs",
+      "name": "openweather.timeoutMs",
       "type": "java.lang.String",
-      "description": "Timout to repeat after."
+      "description": "How long do we wait for API to respond."
+    },
+    {
+      "name": "openweather.repeatTime",
+      "type": "java.lang.Integer",
+      "description": "How much time to ask again if request to API fails."
     },
     {
       "name": "openweather.temperatureDiff",
-      "type": "java.lang.Double",
-      "description": "Description for openweather.temperatureDiff."
+      "type": "java.lang.Integer",
+      "description": "Max difference between clothes perfect temperature and temperature, which is still ok to wear it."
     }
-  ]
-}
+  ] }

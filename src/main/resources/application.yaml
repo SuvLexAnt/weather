@@ -7,12 +7,6 @@ openweather:
 # Server
 server:
   port: 8080
-  ssl:
-    key-alias: selfsigned_localhost_sslserver
-    key-store: classpath:ssl-server.jks
-    key-store-provider: SUN
-    key-store-type: JKS
-    key-store-password: changeit
 # DB
 spring:
   datasource:

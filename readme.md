@@ -16,27 +16,30 @@
 
 ## При использовании Docker для запуска: 
 Для создания сети:
-> docker network create weather_network
+> docker network create weather-network
 
 Для запуска БД:
 > docker pull postgres
-> docker run --name weather_db -e POSTGRES_PASSWORD=password -e POSTGRES_USER=user -e POSTGRES_DB=weather_db --net weather-network -d -p 5436:5432 postgres
+>
+> docker run --name weather_db --rm -e POSTGRES_PASSWORD=password -e POSTGRES_USER=user -e POSTGRES_DB=weather_db --net weather-network -d -p 5436:5432 postgres
+>
 > gradle -Pflyway.user=user -Pflyway.schemas=public -Pflyway.password=password -Pflyway.url=jdbc:postgresql://localhost:5436/weather_db flywayMigrate
 
 Для активации кэша:
 > docker pull redis
-> docker run --name redis-cache -p 6379:6379 --net weather-network -d redis
+>
+> docker run --name redis_cache --rm -p 6379:6379 --net weather-network -d redis
 
-Для построения и запуска приложения:
->  docker build -t weather-app:1.0.0 .
->  docker run -p 8080:8080 --net weather-network -e DATABASE_PORT=5432 -e DATABASE_HOST=${PSQL_HOST} --name=weather-app -it weather-app:1.0.0
-
+Для запуска приложения:
+> gradle clean bootJar
+>
+> gradle bootRun
 
 ## При использовании Docker-compose:
 Вместо всех предыдущих команд:
 >  docker-compose up
 
-Приложение можно увидеть в браузере [по этому адресу](https://localhost:8080/)
+Приложение можно увидеть в браузере [по этому адресу](http://localhost:8080/)
 
 ## Описание структуры приложения        
 ### Схема работы и архитектура приложения
