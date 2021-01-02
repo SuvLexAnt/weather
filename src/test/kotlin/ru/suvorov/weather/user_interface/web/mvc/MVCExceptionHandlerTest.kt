@@ -20,11 +20,8 @@ import java.net.URI
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MVCExceptionHandlerTest(
         @LocalServerPort private val port: Int,
-        @Autowired
-        private val testRestTemplate: TestRestTemplate,
-        @Autowired
-        private val restTemplate: RestTemplate,
-
+        @Autowired private val testRestTemplate: TestRestTemplate,
+        @Autowired private val restTemplate: RestTemplate,
         @Autowired private val urlComposer: OpenWeatherUrlComposer
 ) {
 
@@ -37,8 +34,7 @@ class MVCExceptionHandlerTest(
         //Given
         val correctUrl = urlComposer.getWeatherPredictionUrlByCity(city)
         //When
-        mockServer.expect(ExpectedCount.once(),
-                requestTo(URI(correctUrl)))
+        mockServer.expect(ExpectedCount.once(), requestTo(URI(correctUrl)))
                 .andExpect(method(GET))
                 .andRespond(withStatus(NOT_FOUND))
         //Then
