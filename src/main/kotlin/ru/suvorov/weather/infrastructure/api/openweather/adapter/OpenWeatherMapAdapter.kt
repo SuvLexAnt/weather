@@ -2,7 +2,6 @@ package ru.suvorov.weather.infrastructure.api.openweather.adapter
 
 import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClientException
@@ -11,22 +10,16 @@ import ru.suvorov.weather.core.port.secondary.WeatherFacade
 import ru.suvorov.weather.core.component.weather.Weather
 import ru.suvorov.weather.infrastructure.api.openweather.dto.WeatherDTO
 import lib.logging.logger
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
-import org.springframework.web.client.exchange
 import ru.suvorov.weather.infrastructure.api.openweather.exception.OpenWeatherException
-import java.lang.RuntimeException
-import java.util.*
 
 @Slf4j
 @Service
 class OpenWeatherMapAdapter(
         @Autowired private val restTemplate: RestTemplate,
-        @Value("\${apiKey}") private val apiKey: String
+        @Autowired private val urlComposer: OpenWeatherUrlComposer
 ) : WeatherFacade {
 
-    private val units = "metric"
     private val log = logger()
 
     //TODO: Add Spring Retry functionality to make it fail tolerant
@@ -34,7 +27,7 @@ class OpenWeatherMapAdapter(
     //@Cacheable("weather", key = "#city")
     override fun getWeatherByCity(city: String): Weather {
 
-        val url = "http://api.openweathermap.org/data/2.5/weather?q=$city&units=$units&appid=$apiKey"
+        val url = urlComposer.getWeatherPredictionUrlByCity(city)
 
         var response: ResponseEntity<WeatherDTO> = ResponseEntity(HttpStatus.NOT_FOUND)
 

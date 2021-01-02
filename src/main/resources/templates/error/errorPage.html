@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style type="text/css">
+        h1, h4 {
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+            color: #39AF77
+        }
+    </style>
+</head>
+<body class="black white-text">
+<div class="container">
+    <h1 th:text="'№' + ${ErrorNum} + ' error happened'">Some error happened</h1>
+    <h4>The good news are we have a funny picture down here just in case</h4>
+    <img src="/images/it_always_has_been.jpg" th:src="@{/images/it_always_has_been.jpg}"
+         alt="It's a funny picture, all right?">
+</div>
+</body>

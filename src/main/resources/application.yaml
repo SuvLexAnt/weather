@@ -4,6 +4,8 @@ openweather:
   timeoutMs: 1000
   repeatTime: 3
   temperatureDiff: 9
+  url: http://api.openweathermap.org/data/2.5/weather?
+  units: metric
 # Server
 server:
   port: 8080
