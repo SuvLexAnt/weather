@@ -49,9 +49,9 @@ class OpenWeatherMapAdapterTest(
 
     @ParameterizedTest
     @ValueSource(strings = ["-wind", "-base", "-name", "-main"])
-    fun apiResponseMissingWindParameter(error: String) {
+    fun apiResponseMissingWindParameter(missingField: String) {
         //Given
-        val apiResponse = getFileValue("openweatherApi/weather$error.json")
+        val apiResponse = getFileValue("openweatherApi/weather$missingField.json")
         val correctUrl = urlComposer.getWeatherPredictionUrlByCity(city)
         //When
         mockServer.expect(ExpectedCount.once(), requestTo(URI(correctUrl)))
