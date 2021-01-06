@@ -5,7 +5,7 @@
 использован фреймворк `Spring`, 
 для фронта выбран шаблонизатор `Thymeleaf`,
 база данных для рекомендаций - `Postgres`,
-в качестве кэша - `Redis`.
+~~в качестве кэша - `Redis`.~~
 
 Кроме того, были использованы стандартные стили `Materialize`.
 
@@ -23,10 +23,13 @@
 >
 > gradle -Pflyway.user=user -Pflyway.schemas=public -Pflyway.password=password -Pflyway.url=jdbc:postgresql://localhost:5436/weather_db flywayMigrate
 
+<del>
 Для активации кэша:
 > docker pull redis
 >
 > docker run --name redis_cache --rm -p 6379:6379 --net weather-network -d redis
+
+</del>
 
 Для запуска приложения:
 > gradle clean bootJar bootRun
@@ -55,7 +58,24 @@
 ## Правило внесения изменений
 Изменения вносятся при помощи pull-request, после проверки администратором добавляются в продакшн.
 
+В случае внесения изменений в структуру базы данных необходимо обновить конфигурацию flyway, добавив новый файл согласно
+стандартной конвенции, потом создать новый докер-образ миграции (версионирование согласно стандартной конвенции):
+
+> docker build -t suvlexant/weather_db_migration:* -f DockerFileMigration .
+ 
+Далее необходимо обновить образ в удалённом репозитории:
+
+> docker push suvlexant/weather_db_migration:*
+
 ## Чеклист для самопроверки
 - [ ] Запустить все тесты
 - [ ] Запустить через *gradle clean bootJar bootRun* и через *docker-compose up*
+
+# Как развёртывать сервис на VDS
+## Войти в учётные записи
+В консоли виртуальной машины войти в docker hub:
+
+> docker login --password=* --username=*
+
+
 

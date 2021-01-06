@@ -8,20 +8,20 @@ services:
       POSTGRES_DB: weather_db
     networks:
       - main-network
-  redis:
-    image: redis:6.0.8-alpine
-    networks:
-      - main-network
+#  redis:
+#    image: redis:6.0.8-alpine
+#    networks:
+#      - main-network
 #    environment:
 
   app:
     build: ./
     ports:
       - 8080:8080
-      - 7001:7001
+#      - 7001:7001
     depends_on:
       - db
-      - redis
+#      - redis
     networks:
       - main-network
     environment:
@@ -30,7 +30,7 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=weather_db
-      - CACHE_HOST=redis
+#      - CACHE_HOST=redis
   migration:
     build:
       context: .
