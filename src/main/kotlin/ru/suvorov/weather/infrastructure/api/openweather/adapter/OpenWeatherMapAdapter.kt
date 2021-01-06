@@ -36,14 +36,14 @@ class OpenWeatherMapAdapter(
             log.info("Response from Weather API received")
             return response.body!!.toWeather()
         } catch (ex: RestClientException) {
-            throw handleException(response.statusCode, url, ex)
+            val urlForLogs = urlComposer.getWeatherPredictionUrlByCity(city, true)
+            throw handleException(response.statusCode, urlForLogs, ex)
         }
     }
 
     private fun WeatherDTO.toWeather()
             = Weather(name, main.temp.toDouble(), wind.speed.toDouble(), main.humidity, rain != null, snow != null)
 
-    @Throws(OpenWeatherException::class)
     private fun handleException(status: HttpStatus, url: String, ex: RestClientException): OpenWeatherException {
         return if (status.isError) {
             log.error("Weather API ${status.ordinal} code received, url = $url")

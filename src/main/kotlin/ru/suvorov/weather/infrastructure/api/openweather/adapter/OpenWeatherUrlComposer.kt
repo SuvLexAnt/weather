@@ -10,5 +10,6 @@ class OpenWeatherUrlComposer(
         @Value("\${openweather.units}") private val units: String
 ) {
 
-    fun getWeatherPredictionUrlByCity(city: String): String = "${url}q=$city&units=$units&appid=$apiKey"
+    fun getWeatherPredictionUrlByCity(city: String, hideKey: Boolean = false): String
+            = "${url}q=$city&units=$units&appid=${if (hideKey) "API_KEY" else apiKey}"
 }
