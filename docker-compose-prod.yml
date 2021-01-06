@@ -1,0 +1,45 @@
+version: '3.5'
+services:
+  db:
+    image: postgres:13.0-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: weather_db
+    networks:
+      - main-network
+  app:
+    image: suvlexant/weather_app:1.0.0
+    ports:
+      - 8080:8080
+      - 7001:7001
+    depends_on:
+      - db
+    networks:
+      - main-network
+    environment:
+      - DATABASE_HOST=DB
+      - DATABASE_PORT=5432
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=weather_db
+  migration:
+    image: suvlexant/weather_db_migration:1.0.0
+    networks:
+      - main-network
+    environment:
+      - HOST=db
+      - PORT=5432
+      - USER=user
+      - PASSWORD=password
+      - DB=weather_db
+    depends_on:
+      - app
+    deploy:
+      restart_policy:
+        condition: on-failure
+volumes:
+  weather-data:
+networks:
+  main-network:
+    driver: bridge
