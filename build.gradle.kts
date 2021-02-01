@@ -56,6 +56,12 @@ dependencies {
     }
     //Monitoring
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    //Security
+    implementation("org.springframework.boot:spring-boot-starter-security")
+//    implementation("org.springframework.security:spring-security-config")
+
+//    implementation("io.jsonwebtoken:jjwt:0.9.1")
+//    implementation("javax.xml.bind:jaxb-api:2.3.0")
 }
 
 tasks.withType<Test> {
