@@ -31,8 +31,7 @@ class RecommendationServiceImpl(
         val hatsAndBody = clothesRepository.getClothesByParams(
                 weather.snow,
                 weather.rain,
-                weather.temperature,
-                temperatureDiff).groupBy { it.type }
+                weather.temperature - temperatureDiff).groupBy { it.type }
         return SetOfClothes(
                 hatsAndBody[Type.HAT],
                 hatsAndBody[Type.BODY])

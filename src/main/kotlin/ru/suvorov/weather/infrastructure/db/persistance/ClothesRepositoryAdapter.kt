@@ -1,7 +1,6 @@
 package ru.suvorov.weather.infrastructure.db.persistance
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Repository
@@ -16,10 +15,9 @@ class ClothesRepositoryAdapter(
 
     override fun getClothesByParams(snow: Boolean,
                                     rain: Boolean,
-                                    temperature: Double,
-                                    temperatureDiff: Int): List<Clothes> = jdbc.query("""
+                                    minTemperature: Double): List<Clothes> = jdbc.query("""
             SELECT NAME, TYPE FROM CLOTHES WHERE
-            TEMPERATURE BETWEEN ${temperature - temperatureDiff} AND ${temperature + temperatureDiff} 
+            TEMPERATURE >= $minTemperature 
             AND SNOW = $snow 
             AND RAIN = $rain
             """, rmClothes())
