@@ -56,26 +56,36 @@
 
 # Как контрибутить в сервис
 ## Правило внесения изменений
+### Внесение изменений в код
 Изменения вносятся при помощи pull-request, после проверки администратором добавляются в продакшн.
+
+После внесения изменений в код необходимо перестроить образ приложения (версионирование согласно стандартной конвенции):
+
+> docker build -t suvlexant/weather_app:VERSION_NUMBER .
+
+далее необходимо обновить образ в удалённом репозитории:
+
+> docker push suvlexant/weather_app:VERSION_NUMBER
+
+### Внесение изменений в БД
 
 В случае внесения изменений в структуру базы данных необходимо обновить конфигурацию flyway, добавив новый файл согласно
 стандартной конвенции, потом создать новый докер-образ миграции (версионирование согласно стандартной конвенции):
 
-> docker build -t suvlexant/weather_db_migration:* -f DockerFileMigration .
+> docker build -t suvlexant/weather_db_migration:VERSION_NUMBER -f DockerFileMigration .
  
-Далее необходимо обновить образ в удалённом репозитории:
+далее необходимо обновить образ в удалённом репозитории:
 
-> docker push suvlexant/weather_db_migration:*
+> docker push suvlexant/weather_db_migration:VERSION_NUMBER
 
 ## Чеклист для самопроверки
 - [ ] Запустить все тесты
-- [ ] Запустить через *gradle clean bootJar bootRun* и через *docker-compose up*
+- [ ] Запустить через `gradle clean bootJar bootRun` и через `docker-compose up`
+- [ ] Запустить продовскую конфигурацию через `docker-compose -f docker-compose-prod.yml up`
 
 # Как развёртывать сервис на VDS
-## Войти в учётные записи
-В консоли виртуальной машины войти в docker hub:
-
-> docker login --password=* --username=*
+1. Заменить текст файла *docker-compose.yml* на текст *docker-compose-prod.yml* из репозитория
+2. Запустить `docker-compose up --remove-orphans`
 
 
 

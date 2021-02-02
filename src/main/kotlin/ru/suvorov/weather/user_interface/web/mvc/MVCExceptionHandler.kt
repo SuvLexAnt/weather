@@ -10,12 +10,19 @@ import javax.servlet.http.HttpServletRequest
 @ControllerAdvice
 class MVCExceptionHandler: ResponseEntityExceptionHandler() {
 
+    @ExceptionHandler(Exception::class)
+    fun handleException(req: HttpServletRequest): ModelAndView {
+        val modelAndView = ModelAndView()
+        modelAndView.viewName = "error/errorPage"
+        modelAndView.addObject("ErrorNum",500)
+        return modelAndView
+    }
+
     @ExceptionHandler(OpenWeatherException::class)
     fun handleApiException(req: HttpServletRequest): ModelAndView {
         val modelAndView = ModelAndView()
-        modelAndView.viewName = "error/errorPage"
-
-        modelAndView.addObject("ErrorNum",500)
+        modelAndView.viewName = "index"
+        modelAndView.addObject("WrongCityName",true)
         return modelAndView
     }
 }

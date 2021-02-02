@@ -9,9 +9,9 @@ services:
     networks:
       - main-network
   app:
-    image: suvlexant/weather_app:1.0.0
+    image: suvlexant/weather_app:1.0.1
     ports:
-      - 8080:8080
+      - 8006:8080
       - 7001:7001
     depends_on:
       - db

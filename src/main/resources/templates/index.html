@@ -33,6 +33,10 @@
                     <input type="text" name="city" class="validate" required="required"
                            pattern="[A-Za-z0-9]{1,50}">
                 </label>
+                <!--/*@thymesVar id="WrongCityName" type="java.lang.Boolean"*/-->
+                <div class="card-panel pulse red lighten-4" style="padding: 10px" th:if="${WrongCityName}">
+                    Write existing city name please
+                </div>
                 <button class="btn waves-effect waves-light" type="submit">
                     Get recommendations
                     <i class="material-icons right">send</i>

@@ -1,4 +1,4 @@
-package lib.logging
+package ru.suvorov.weather.lib.logging
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
