@@ -1,4 +1,4 @@
-package ru.suvorov.weather.user_interface.web.mvc.user
+package ru.suvorov.weather.user_interface.web.mvc
 
 import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,14 +15,14 @@ class RecommendationController(
 ) {
 
     @GetMapping
-    fun index() = "index"
+    fun index() = "recommendation/index"
 
     @GetMapping("/recommendation")
     fun getRecommendationsByCity(
             @RequestParam("city") city: String,
             @RequestParam("temperatureDiff") temperatureDiffOrNull: Int?,
             modelAndView: ModelAndView): ModelAndView {
-        modelAndView.viewName = "index"
+        modelAndView.viewName = "recommendation/index"
         modelAndView.addObject("temperatureDiff", temperatureDiffOrNull)
         modelAndView.addObject("weatherAndRecommendations",
                 recommendationService.getWeatherAndRecommendationsByCity(city, temperatureDiffOrNull))

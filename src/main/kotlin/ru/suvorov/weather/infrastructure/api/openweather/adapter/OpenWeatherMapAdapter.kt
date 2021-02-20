@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate
 import ru.suvorov.weather.core.port.secondary.WeatherFacade
 import ru.suvorov.weather.core.component.weather.Weather
 import ru.suvorov.weather.infrastructure.api.openweather.dto.WeatherDTO
-import lib.logging.logger
+import ru.suvorov.weather.lib.logging.logger
 import org.springframework.http.HttpStatus
 import ru.suvorov.weather.infrastructure.api.openweather.exception.OpenWeatherException
 
