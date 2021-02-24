@@ -18,8 +18,8 @@ class ClothesRepositoryAdapter(
                                     minTemperature: Double): List<Clothes> = jdbc.query("""
             SELECT NAME, TYPE FROM CLOTHES WHERE
             TEMPERATURE >= $minTemperature 
-            AND SNOW = $snow 
-            AND RAIN = $rain
+            AND (SNOW = true OR SNOW = $snow)
+            AND (RAIN = true OR RAIN = $rain)
             """, rmClothes())
 
 
