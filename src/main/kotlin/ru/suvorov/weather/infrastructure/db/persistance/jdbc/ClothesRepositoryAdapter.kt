@@ -1,4 +1,4 @@
-package ru.suvorov.weather.infrastructure.db.persistance
+package ru.suvorov.weather.infrastructure.db.persistance.jdbc
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
