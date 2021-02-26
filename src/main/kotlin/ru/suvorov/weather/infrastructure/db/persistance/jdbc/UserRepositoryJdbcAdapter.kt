@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.queryForObject
+import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.stereotype.Repository
 import ru.suvorov.weather.core.component.user.MyUserDetails
@@ -32,7 +33,7 @@ class UserRepositoryJdbcAdapter(
         SELECT ID FROM USERS WHERE USERNAME = '$username'
         """)
 
-    fun rmAuthorities() = RowMapper { rs, _ ->
+    fun rmAuthorities(): RowMapper<GrantedAuthority> = RowMapper { rs, _ ->
         SimpleGrantedAuthority(rs.getString("ROLE"))
     }
 
