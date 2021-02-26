@@ -8,9 +8,13 @@ class MyUserDetails(
         private val hashedPassword: String,
         private val enabled: Boolean,
         //TODO: Add multiple authorities
-        private val authority: GrantedAuthority
+        private val authorities: MutableList<GrantedAuthority> = mutableListOf()
 ): UserDetails {
-    override fun getAuthorities() = mutableListOf(authority)
+    fun setAuthorities(authorities: MutableList<GrantedAuthority>) {
+        this.authorities.addAll(authorities)
+    }
+
+    override fun getAuthorities() = authorities
 
     override fun isEnabled() = enabled
 

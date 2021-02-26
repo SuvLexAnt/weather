@@ -17,16 +17,10 @@ class SecurityConfiguration(
         @Autowired private val dataSource: DataSource,
         @Qualifier("firstUserDetailsService") @Autowired
         private val userDetailsService: UserDetailsService
-): WebSecurityConfigurerAdapter() {
+) : WebSecurityConfigurerAdapter() {
 
-    override fun configure(auth: AuthenticationManagerBuilder?)  {
+    override fun configure(auth: AuthenticationManagerBuilder?) {
         auth!!.userDetailsService(userDetailsService)
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .usersByUsernameQuery(
-//                        "select username, password, enabled from users where username=?")
-//                .authoritiesByUsernameQuery(
-//                        "select username, role from user_roles where username=?")
     }
 
     override fun configure(http: HttpSecurity?) {

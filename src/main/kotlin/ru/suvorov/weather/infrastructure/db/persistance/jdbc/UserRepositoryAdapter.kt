@@ -12,30 +12,37 @@ import ru.suvorov.weather.core.component.user.MyUserDetails
 import ru.suvorov.weather.core.port.secondary.UserRepository
 import java.sql.ResultSet
 
+private const val USER_DETAILS_QUERY = "SELECT username, password, enabled FROM users"
+
 @Repository
 class UserRepositoryAdapter(
         @Autowired private val jdbc: JdbcTemplate
 ) : UserRepository {
-    //TODO: Delete limit and order so multiple authority is ok
-    override fun getUserDetails(username: String) = jdbc.queryForObject("""
-        SELECT users.username, password, enabled, role AS authority
-        FROM users
-            JOIN user_roles ON users.username = user_roles.username
-        WHERE users.username = '$username'
-        ORDER BY id
-        LIMIT 1""",
-            rmUserDetails()
-    )!!
+    override fun getUserDetails(username: String): MyUserDetails {
+        val userDetails = jdbc.queryForObject("""$USER_DETAILS_QUERY WHERE username = '$username'""",
+                rmUserDetails())!!
+        userDetails.authorities = getUserAuthority(username)
+        return userDetails
+    }
+
+    private fun getUserAuthority(username: String) = jdbc.query("""
+        SELECT role 
+        FROM user_roles
+        WHERE username = '$username'
+    """, rmAuthorities())
 
     override fun getUserIdByUsername(username: String): Long = jdbc.queryForObject("""
-            SELECT ID FROM USERS WHERE USERNAME = '$username'
+        SELECT ID FROM USERS WHERE USERNAME = '$username'
         """)
+
+    fun rmAuthorities() = RowMapper { rs, _ ->
+        SimpleGrantedAuthority(rs.getString("ROLE"))
+    }
 
     fun rmUserDetails() = RowMapper { rs, _ ->
         MyUserDetails(
                 rs.getString("username"),
                 rs.getString("password"),
-                rs.getBoolean("enabled"),
-                SimpleGrantedAuthority (rs.getString("authority")))
+                rs.getBoolean("enabled"))
     }
 }

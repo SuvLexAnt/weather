@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service
 import ru.suvorov.weather.core.port.secondary.UserRepository
 
 @Service
-//@Primary
 class FirstUserDetailsService(
     @Autowired private val userRepository: UserRepository
 ): UserDetailsService {

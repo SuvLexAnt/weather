@@ -9,20 +9,20 @@ import ru.suvorov.weather.core.component.clothes.ClothesShort
 import ru.suvorov.weather.core.component.clothes.Type
 import ru.suvorov.weather.core.port.secondary.ClothesRepository
 
+private const val CLOTHES_QUERY = """SELECT ID, NAME, TYPE, TEMPERATURE, SNOW, RAIN, IMAGE FROM clothes"""
+
 @Repository
 class ClothesRepositoryAdapter(
         @Autowired private val jdbc: JdbcTemplate
 ) : ClothesRepository {
-    override fun getAllClothesNotAuthorizedUser(): List<Clothes> =
-        jdbc.query("""
-        SELECT ID, NAME, TYPE, TEMPERATURE, SNOW, RAIN, IMAGE 
-        FROM clothes
+
+    override fun getAllClothesNotAuthorizedUser(): List<Clothes> = jdbc.query("""
+        $CLOTHES_QUERY
         WHERE USER_ID IS NULL
     """, rmClothes())
 
     override fun getAllClothesByUserId(userId: Long): List<Clothes> = jdbc.query("""
-        SELECT ID, NAME, TYPE, TEMPERATURE, SNOW, RAIN, IMAGE 
-        FROM clothes
+        $CLOTHES_QUERY
         WHERE USER_ID = $userId OR USER_ID IS NULL
     """, rmClothes())
 
@@ -38,9 +38,7 @@ class ClothesRepositoryAdapter(
                 userId)
     }
 
-    override fun getAllClothes(): List<Clothes> = jdbc.query("""
-        SELECT ID, NAME, TYPE, TEMPERATURE, SNOW, RAIN, IMAGE FROM clothes
-        """, rmClothes())
+    override fun getAllClothes(): List<Clothes> = jdbc.query(CLOTHES_QUERY, rmClothes())
 
     override fun getClothesByParams(snow: Boolean,
                                     rain: Boolean,
