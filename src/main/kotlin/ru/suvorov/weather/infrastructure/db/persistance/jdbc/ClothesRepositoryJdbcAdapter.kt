@@ -12,7 +12,7 @@ import ru.suvorov.weather.core.port.secondary.ClothesRepository
 private const val CLOTHES_QUERY = """SELECT ID, NAME, TYPE, TEMPERATURE, SNOW, RAIN, IMAGE FROM clothes"""
 
 @Repository
-class ClothesRepositoryAdapter(
+class ClothesRepositoryJdbcAdapter(
         @Autowired private val jdbc: JdbcTemplate
 ) : ClothesRepository {
 
