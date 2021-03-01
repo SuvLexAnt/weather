@@ -1,13 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
 <div th:fragment="header">
-    <h1>Weather app</h1>
-    <div class="divider"></div>
+    <nav>
+        <div class="nav-wrapper teal lighten-1">
+            <a href="#" th:href="@{'/'}" class="brand-logo">Weather app</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#" th:href="@{'/'}"><i class="material-icons left">thumb_up</i>
+                    Recommendations
+                </a></li>
+                <li><a href="#" th:href="@{/clothes}"><i class="material-icons left">storage</i>
+                    My clothes
+                </a></li>
+                <li><!--suppress ThymeleafVariablesResolveInspection -->
+                    <a href="#" th:href="@{${login != null ? '/logout' : '/login'}}">
+                        <i class="material-icons left">[[${login != null ? 'person': 'person_outline'}]]</i>
+                        <span th:text="${login != null ? 'Log out @' + login + ' account' : 'Log in'}"></span>
+                    </a></li>
+            </ul>
+        </div>
+    </nav>
 </div>
 </body>
 </html>

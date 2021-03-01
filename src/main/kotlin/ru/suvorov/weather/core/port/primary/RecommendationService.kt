@@ -4,5 +4,5 @@ import ru.suvorov.weather.core.component.use_cases.dto.WeatherAndClothesDTO
 
 interface RecommendationService {
 
-    fun getWeatherAndRecommendationsByCity(city: String, temperatureDiffOrNull: Int?): WeatherAndClothesDTO
+    fun getWeatherAndRecommendationsByCity(city: String, temperatureDiffOrNull: Int?, userId: Long?): WeatherAndClothesDTO
 }

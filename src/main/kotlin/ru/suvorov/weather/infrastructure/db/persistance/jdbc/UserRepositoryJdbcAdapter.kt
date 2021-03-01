@@ -3,14 +3,13 @@ package ru.suvorov.weather.infrastructure.db.persistance.jdbc
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
-import org.springframework.jdbc.core.queryForObject
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.stereotype.Repository
 import ru.suvorov.weather.core.component.user.MyUserDetails
 import ru.suvorov.weather.core.port.secondary.UserRepository
 
-private const val USER_DETAILS_QUERY = "SELECT username, password, enabled FROM users"
+private const val USER_DETAILS_QUERY = "SELECT id, username, password, enabled FROM users"
 
 @Repository
 class UserRepositoryJdbcAdapter(
@@ -29,9 +28,9 @@ class UserRepositoryJdbcAdapter(
         WHERE username = '$username'
     """, rmAuthorities())
 
-    override fun getUserIdByUsername(username: String): Long = jdbc.queryForObject("""
-        SELECT ID FROM USERS WHERE USERNAME = '$username'
-        """)
+//    override fun getUserIdByUsername(username: String): Long = jdbc.queryForObject("""
+//        SELECT ID FROM USERS WHERE USERNAME = '$username'
+//        """)
 
     fun rmAuthorities(): RowMapper<GrantedAuthority> = RowMapper { rs, _ ->
         SimpleGrantedAuthority(rs.getString("ROLE"))
@@ -39,6 +38,7 @@ class UserRepositoryJdbcAdapter(
 
     fun rmUserDetails() = RowMapper { rs, _ ->
         MyUserDetails(
+                rs.getLong("id"),
                 rs.getString("username"),
                 rs.getString("password"),
                 rs.getBoolean("enabled"))

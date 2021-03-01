@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 import ru.suvorov.weather.core.port.secondary.UserRepository
 
 @Service
-class FirstUserDetailsService(
+class MyUserDetailsService(
         @Autowired private val userRepository: UserRepository
 ) : UserDetailsService {
     override fun loadUserByUsername(username: String?): UserDetails = userRepository.getUserDetails(username!!) ?:

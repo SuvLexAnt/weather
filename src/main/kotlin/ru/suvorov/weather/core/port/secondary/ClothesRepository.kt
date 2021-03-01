@@ -5,14 +5,9 @@ import ru.suvorov.weather.core.component.clothes.ClothesShort
 
 interface ClothesRepository {
 
-    fun getClothesByParams(snow: Boolean, rain: Boolean, temperature: Double, temperatureDiff: Int): List<ClothesShort>
+    fun getShortClothesByParamsByUserId(snow: Boolean, rain: Boolean, temperature: Double, temperatureDiff: Int, userId: Long?): List<ClothesShort>
 
-    //TODO: Add pagination
-    fun getAllClothes(): List<Clothes>
-
-    fun getAllClothesByUserId(userId: Long): List<Clothes>
-
-    fun getAllClothesNotAuthorizedUser(): List<Clothes>
+    fun getAllClothesByUserId(userId: Long?): List<Clothes>
 
     fun addClothesForUserId(clothes: Clothes, userId: Long)
 }

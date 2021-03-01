@@ -4,10 +4,10 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 class MyUserDetails(
+        val id: Long,
         private val userName: String,
         private val hashedPassword: String,
         private val enabled: Boolean,
-        //TODO: Add multiple authorities
         private val authorities: MutableList<GrantedAuthority> = mutableListOf()
 ): UserDetails {
     fun setAuthorities(authorities: MutableList<GrantedAuthority>) {

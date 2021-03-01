@@ -16,14 +16,9 @@ class ClothesRepositoryJdbcAdapter(
         @Autowired private val jdbc: JdbcTemplate
 ) : ClothesRepository {
 
-    override fun getAllClothesNotAuthorizedUser(): List<Clothes> = jdbc.query("""
+    override fun getAllClothesByUserId(userId: Long?): List<Clothes> = jdbc.query("""
         $CLOTHES_QUERY
-        WHERE USER_ID IS NULL
-    """, rmClothes())
-
-    override fun getAllClothesByUserId(userId: Long): List<Clothes> = jdbc.query("""
-        $CLOTHES_QUERY
-        WHERE USER_ID = $userId OR USER_ID IS NULL
+        WHERE (${userId.let { "USER_ID = $userId" }} OR USER_ID IS NULL)
     """, rmClothes())
 
     override fun addClothesForUserId(clothes: Clothes, userId: Long) {
@@ -38,17 +33,21 @@ class ClothesRepositoryJdbcAdapter(
                 userId)
     }
 
-    override fun getAllClothes(): List<Clothes> = jdbc.query(CLOTHES_QUERY, rmClothes())
-
-    override fun getClothesByParams(snow: Boolean,
-                                    rain: Boolean,
-                                    temperature: Double,
-                                    temperatureDiff: Int): List<ClothesShort> = jdbc.query("""
+    override fun getShortClothesByParamsByUserId(snow: Boolean,
+                                                 rain: Boolean,
+                                                 temperature: Double,
+                                                 temperatureDiff: Int,
+                                                 userId: Long?): List<ClothesShort> {
+        val query = """
             SELECT NAME, TYPE FROM CLOTHES WHERE
-            TEMPERATURE BETWEEN ${temperature - temperatureDiff} AND ${temperature + temperatureDiff} 
-            AND SNOW = $snow 
-            AND RAIN = $rain
-            """, rmClothesShort())
+            TEMPERATURE >= ${temperature - temperatureDiff} 
+            AND (SNOW = $snow OR SNOW = true) 
+            AND (RAIN = $rain OR RAIN = true)
+            AND (${userId.let { "USER_ID = $userId" }} OR USER_ID IS NULL)
+            """
+        return jdbc.query(query, rmClothesShort())
+    }
+
 }
 
 fun rmClothesShort(): RowMapper<ClothesShort> = RowMapper { rs, _ ->
