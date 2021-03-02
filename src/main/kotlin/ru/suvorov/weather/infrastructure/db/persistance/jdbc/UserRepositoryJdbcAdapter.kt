@@ -28,10 +28,6 @@ class UserRepositoryJdbcAdapter(
         WHERE username = '$username'
     """, rmAuthorities())
 
-//    override fun getUserIdByUsername(username: String): Long = jdbc.queryForObject("""
-//        SELECT ID FROM USERS WHERE USERNAME = '$username'
-//        """)
-
     fun rmAuthorities(): RowMapper<GrantedAuthority> = RowMapper { rs, _ ->
         SimpleGrantedAuthority(rs.getString("ROLE"))
     }
