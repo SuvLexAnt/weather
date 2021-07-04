@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clothes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+<div th:insert="~{header-fragment :: header}"></div>
+<div class="container">
+    <div th:object="${userClothes}">
+        <h5>Clothes</h5>
+        <table class="highlight">
+            <tbody>
+            <tr>
+                <td><b>Name</b></td>
+                <td><b>Type</b></td>
+                <td><b>Minimum temperature</b></td>
+                <td><b>Snow</b></td>
+                <td><b>Rain</b></td>
+            </tr>
+            <tr>
+                <form th:method="post" action="#" th:action="@{/clothes}" name="requestForm">
+                    <input type="submit" style="display: none"/>
+                    <td><input type="text" name="name"
+                               required="required"
+                               class="validate"
+                               pattern="[A-Za-z0-9]{1,50}"/></td>
+                    <td><input list="type-list" name="type"
+                               required="required"
+                               class="validate"
+                               pattern="[A-Za-z0-9]{1,50}"/></td>
+                    <td><input type="number" name="temperature" required="required"
+                               class="validate"></td>
+                    <td>
+                        <div class="switch"><label>
+                            <input type="checkbox" name="snow" checked>
+                            <span class="lever"></span>
+                        </label></div>
+                    </td>
+                    <td>
+                        <div class="switch"><label>
+                            <input type="checkbox" name="rain" checked>
+                            <span class="lever"></span>
+                        </label></div>
+                    </td>
+                </form>
+            </tr>
+            <tr>
+                <div class="card-panel red lighten-4" style="padding: 10px" th:if="${unauthorizedAttemptToAddClothes}">
+                    Authorize to get access to adding custom clothes
+                </div>
+            </tr>
+            <tr th:each="clothes: ${userClothes}">
+                <td th:text="${clothes.getName()}">Name</td>
+                <td th:text="${clothes.getType().name().toUpperCase()}">Type</td>
+                <td th:text="${clothes.getTemperature() + '°C'}">0°C</td>
+                <td th:text="${clothes.getSnow() ? 'Ok for snow' : 'Not for snow'}">Not for snow</td>
+                <td th:text="${clothes.getRain() ? 'Ok for rain' : 'Not for rain'}">Not for rain</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<datalist id="type-list">
+    <option th:each="type: ${types}" th:value="${type.toString().toUpperCase()}"></option>
+</datalist>
+
+<datalist id="bool">
+    <option value="true"></option>
+    <option value="false"></option>
+</datalist>
+
+<script type="application/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, options);
+    });
+</script>
+
+</body>
+</html>

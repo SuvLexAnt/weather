@@ -1,15 +1,13 @@
 package ru.suvorov.weather.core.port.secondary
 
 import ru.suvorov.weather.core.component.clothes.Clothes
+import ru.suvorov.weather.core.component.clothes.ClothesShort
 
 interface ClothesRepository {
 
-    /**
-     * Returns clothes that matches weather conditions
-     * @param snow is there snow outside
-     * @param rain is there rain outside
-     * @param minTemperature minimal acceptable temperature for clothes
-     * @return list of matching clothes
-     */
-    fun getClothesByParams(snow: Boolean, rain: Boolean, minTemperature: Double): List<Clothes>
+    fun getShortClothesByParamsByUserId(snow: Boolean, rain: Boolean, temperature: Double, temperatureDiff: Int, userId: Long?): List<ClothesShort>
+
+    fun getAllClothesByUserId(userId: Long?): List<Clothes>
+
+    fun addClothesForUserId(clothes: Clothes, userId: Long)
 }

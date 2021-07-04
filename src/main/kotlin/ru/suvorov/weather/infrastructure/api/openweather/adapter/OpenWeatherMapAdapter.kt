@@ -2,16 +2,16 @@ package ru.suvorov.weather.infrastructure.api.openweather.adapter
 
 import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClientException
 import org.springframework.web.client.RestTemplate
-import ru.suvorov.weather.core.port.secondary.WeatherFacade
 import ru.suvorov.weather.core.component.weather.Weather
+import ru.suvorov.weather.core.port.secondary.WeatherFacade
 import ru.suvorov.weather.infrastructure.api.openweather.dto.WeatherDTO
-import ru.suvorov.weather.lib.logging.logger
-import org.springframework.http.HttpStatus
 import ru.suvorov.weather.infrastructure.api.openweather.exception.OpenWeatherException
+import ru.suvorov.weather.lib.logging.logger
 
 @Slf4j
 @Service
@@ -24,6 +24,7 @@ class OpenWeatherMapAdapter(
 
     //TODO: Add Spring Retry functionality to make it fail tolerant
     //TODO: Cover later parsing Unit tests
+    //TODO: Add redis caching
     //@Cacheable("weather", key = "#city")
     override fun getWeatherByCity(city: String): Weather {
 

@@ -95,7 +95,7 @@
 
 # Как развёртывать сервис на VDS
 1. Заменить текст файла *docker-compose.yml* на текст *docker-compose-prod.yml* из репозитория
-2. Запустить `docker-compose up --remove-orphans`
+2. Запустить `docker-compose -f docker-compose-prod.yml up --remove-orphans`
 
 
 

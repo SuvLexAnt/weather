@@ -54,11 +54,10 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
-    testImplementation("com.ninja-squad:springmockk:1.1.3")
     //Monitoring
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     //Security
-//    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-security")
 //    implementation("org.springframework.security:spring-security-config")
 
 //    implementation("io.jsonwebtoken:jjwt:0.9.1")

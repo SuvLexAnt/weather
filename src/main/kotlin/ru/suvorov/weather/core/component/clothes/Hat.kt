@@ -1,5 +1,5 @@
 package ru.suvorov.weather.core.component.clothes
 
-import ru.suvorov.weather.core.component.clothes.Type.*
+import ru.suvorov.weather.core.component.clothes.Type.HAT
 
-class Hat(name: String, type: Type = HAT) : Clothes(name, type)
+class Hat(name: String, type: Type = HAT) : ClothesShort(name, type)

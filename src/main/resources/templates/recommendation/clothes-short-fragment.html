@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="recommendations (recommendations)">
-    <!--/*@thymesVar id="recommendations" type="ru.suvorov.weather.application.clothes.SetOfClothes"*/-->
+    <!--/*@thymesVar id="recommendations" type="ru.suvorov.weather.core.component.clothes.SetOfClothes"*/-->
     <div th:object="${recommendations}">
         <h5>Recommendations</h5>
         <ul class="collection with-header">
             <li class="collection-header"><b>Hat</b></li>
-            <li class="collection-item" th:if="${hat != null}">
-                <div th:text="*{hat.name}">No hat</div>
+            <li class="collection-item" th:if="${recommendations.hat != null && !recommendations.hat.isEmpty()}">
+                <div th:text="${recommendations.hat[0].name}">No hat</div>
             </li>
         </ul>
         <ul class="collection with-header">
