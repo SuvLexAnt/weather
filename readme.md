@@ -93,9 +93,12 @@
 - [ ] Запустить через `gradle clean bootJar bootRun` и через `docker-compose up`
 - [ ] Запустить продовскую конфигурацию через `docker-compose -f docker-compose-prod.yml up`
 
-# Как развёртывать сервис на VDS
-1. Заменить текст файла *docker-compose.yml* на текст *docker-compose-prod.yml* из репозитория
-2. Запустить `docker-compose -f docker-compose-prod.yml up --remove-orphans`
+# Как развёртывать сервис на VDS в первый раз
+> sudo snap install docker
+> 
+> curl -O https://github.com/SuvLexAnt/weather/blob/master/docker-compose-prod.yml
+> 
+> sudo docker-compose -f docker-compose-prod.yml up --remove-orphans
 
 
 
