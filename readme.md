@@ -96,7 +96,7 @@
 # Как развёртывать сервис на VDS в первый раз
 > sudo snap install docker
 > 
-> curl -O https://github.com/SuvLexAnt/weather/blob/master/docker-compose-prod.yml
+> curl -O https://raw.githubusercontent.com/SuvLexAnt/weather/master/docker-compose-prod.yml
 > 
 > sudo docker-compose -f docker-compose-prod.yml up --remove-orphans
 
